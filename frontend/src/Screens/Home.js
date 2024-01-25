@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getShelters } from '../Services/api';
 
 const Home = () => {
   const [shelters, setShelters] = useState([]);
@@ -7,9 +7,9 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/Shelter');
-
-        setShelters(response.data);
+        const response = await getShelters();
+        console.log(response);
+        setShelters(response);
       } catch (error) {
         console.log('Error fetching data', error);
       }
@@ -18,24 +18,22 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div>
       <h1>Welcome to Home Link! Your resource to finding shelter!</h1>
-      <div>
-        <h2>List of Shelters</h2>
-        <ul>
-          {shelters.map((shelter) => (
-            <>
-              <li key={shelter.id}>{shelter.name}</li>
-              <li>
-                There are currently: {shelter.capacity} open slots at{' '}
-                {shelter.location}
-              </li>
-              <br />
-            </>
-          ))}
-        </ul>
-      </div>
-    </>
+      <h2>List of Shelters</h2>
+      <ul>
+        {shelters.map((shelter) => (
+          <div key={shelter.id}>
+            <li>{shelter.name}</li>
+            <li>
+              There are currently: {shelter.capacity} open slots at{' '}
+              {shelter.location}
+            </li>
+            <br />
+          </div>
+        ))}
+      </ul>
+    </div>
   );
 };
 
