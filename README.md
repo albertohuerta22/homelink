@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# HomeLink
+Purpose of this app is to centralize all resources for local unhoused community. Users will navigate the SPA and view local shelters, weather, resources, news and NYC emergency contacts.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -6,6 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## Be sure to select Frontend / Backend then:
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -13,6 +16,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+Runs the backend in the development mode.\
+Open [http://localhost:3000](http://localhost:3001) to view it in your browser.
+
 
 ### `npm test`
 
