@@ -27,33 +27,21 @@ router.post('/Shelter', async (req, res) => {
   }
 });
 
-router.put('/Shelter/:id', async (req, res) => {
-  const shelterId = req.params.id;
+router.put('/shelter/:id', async (req, res) => {
+  const { id } = req.params;
   const { name, capacity, location } = req.body;
 
   try {
-    const updateQuery = `
-      UPDATE Shelter
-      SET name = :name, capacity = :capacity, location = :location
-      WHERE id = :id
-    `;
-
-    // Using Sequelize query method for raw SQL
-    const [updatedRows, updatedData] = await Shelter.sequelize.query(
-      updateQuery,
-      {
-        replacements: { id: shelterId, name, capacity, location },
-        type: Shelter.sequelize.QueryTypes.UPDATE,
-      }
+    const [updatedRows, _] = await Shelter.update(
+      { name, capacity, location },
+      { where: { id } }
     );
 
-    res
-      .status(200)
-      .json({
-        message: 'Shelter updated successfully',
-        updatedRows,
-        updatedData,
-      });
+    if (updatedRows > 0) {
+      res.status(200).json({ message: 'Shelter updated successfully' });
+    } else {
+      res.status(404).json({ message: 'Shelter not found' });
+    }
   } catch (error) {
     console.error(error);
     res
