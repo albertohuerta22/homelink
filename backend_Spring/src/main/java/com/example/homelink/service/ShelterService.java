@@ -1,3 +1,9 @@
+package com.example.homelink.service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.homelink.entity.ShelterRepository;
+
 @Service
 public class ShelterService {
 
