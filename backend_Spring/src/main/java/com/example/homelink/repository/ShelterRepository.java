@@ -1,5 +1,6 @@
-package com.example.homelink.entity;
+package com.example.homelink.repository;
 
+import com.example.homelink.entity.Shelter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

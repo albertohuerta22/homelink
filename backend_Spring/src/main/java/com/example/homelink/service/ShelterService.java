@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 //my local files
 import com.example.homelink.entity.Shelter;
-import com.example.homelink.entity.ShelterRepository;
+import com.example.homelink.repository.ShelterRepository;
 
 @Service
 public class ShelterService {
