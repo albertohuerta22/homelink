@@ -1,5 +1,7 @@
 package com.example.homelink.service;
 import java.util.List;
+import java.util.UUID;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +20,17 @@ public class ShelterService {
         return shelterRepository.findAll();
     }
 
-    // Other methods for handling business logic and interacting with the repository
+    // public Optional<Shelter> getShelterById(UUID id) {
+    //     return shelterRepository.getById(id);
+    // }
+
+    // public Shelter saveShelter(Shelter shelter) {
+    //     return shelterRepository.save(shelter);
+    // }
+
+    // public void deleteShelter(UUID id) {
+    //     shelterRepository.deleteById(id);
+    // }
+
+    
 }

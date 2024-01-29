@@ -1,19 +1,34 @@
 package com.example.homelink;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.core.env.MapPropertySource;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.StandardEnvironment;
+
+import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.DotenvEntry;
 
 @SpringBootApplication
 public class HomeLinkApplication {
     public static void main(String[] args) {
 
-         System.out.println("DB_URL: " + System.getenv("DB_URL"));
-        System.out.println("DB_USERNAME: " + System.getenv("DB_USERNAME"));
-        System.out.println("DB_PASSWORD: " + System.getenv("DB_PASSWORD"));
-        System.out.println("SERVER_PORT: " + System.getenv("SERVER_PORT"));
-
-        // Rest of your application code
-
-        SpringApplication.run(HomeLinkApplication.class, args);
+        Map<String, Object> env = Dotenv.load()
+                .entries()
+                .stream()
+                .collect(
+                        Collectors.toMap(DotenvEntry::getKey, DotenvEntry::getValue));
+        new SpringApplicationBuilder(HomeLinkApplication.class)
+                .environment(new StandardEnvironment() {
+                    @Override
+                    protected void customizePropertySources(MutablePropertySources propertySources) {
+                        super.customizePropertySources(propertySources);
+                        propertySources.addLast(new MapPropertySource("dotenvProperties", env));
+                    }
+                }).run(args);
     }
 }

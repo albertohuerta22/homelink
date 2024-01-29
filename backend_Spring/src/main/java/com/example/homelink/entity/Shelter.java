@@ -1,20 +1,22 @@
 package com.example.homelink.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Shelter {
 
     
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO)
+@SequenceGenerator(name="car_generator", sequenceName = "car_seq", allocationSize=50)
+    private Long id;
 
     private String name;
     private Integer capacity;
@@ -24,19 +26,19 @@ public class Shelter {
         // Default constructor required by JPA
     }
 
-     public Shelter(String name, Integer capacity, String location, UUID id) {
+     public Shelter(String name, Integer capacity, String location, Long id) {
         this.name = name;
         this.capacity = capacity;
         this.location = location;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
     // Getters and setters
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
