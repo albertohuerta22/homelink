@@ -1,21 +1,17 @@
 package com.example.homelink.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Shelter {
 
     
 @Id
-@GeneratedValue(strategy=GenerationType.AUTO)
-@SequenceGenerator(name="car_generator", sequenceName = "car_seq", allocationSize=50)
+@GeneratedValue(strategy=GenerationType.SEQUENCE)
+
     private Long id;
 
     private String name;
@@ -27,6 +23,7 @@ public class Shelter {
     }
 
      public Shelter(String name, Integer capacity, String location, Long id) {
+        this.id = id;
         this.name = name;
         this.capacity = capacity;
         this.location = location;

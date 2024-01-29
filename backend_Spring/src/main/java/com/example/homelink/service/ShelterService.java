@@ -1,6 +1,5 @@
 package com.example.homelink.service;
 import java.util.List;
-import java.util.UUID;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,18 @@ public class ShelterService {
         return shelterRepository.findAll();
     }
 
-    // public Optional<Shelter> getShelterById(UUID id) {
-    //     return shelterRepository.getById(id);
-    // }
+    public Optional<Shelter> getShelterById(Long id) {
+    System.out.println("Searching for shelter with ID: " + id);
+    Optional<Shelter> shelter = shelterRepository.findById(id);
+    
+    if (shelter.isPresent()) {
+        System.out.println("Found shelter: " + shelter.get());
+    } else {
+        System.out.println("Shelter not found for ID: " + id);
+    }
+    
+    return shelter;
+}
 
     // public Shelter saveShelter(Shelter shelter) {
     //     return shelterRepository.save(shelter);
