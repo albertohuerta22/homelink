@@ -13,16 +13,16 @@ public class Charger {
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 
     private Long id;
-    private String name;
+    private String streetAddress;
     private String location;
 
     public Charger() {
         // Default constructor required by JPA
     }
 
-     public Charger(String name, String location, Long id) {
+     public Charger(String streetAddress, String location, Long id) {
         this.id = id;
-        this.name = name;
+        this.streetAddress = streetAddress;
         this.location = location;
     }
 
@@ -36,12 +36,12 @@ public class Charger {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
 
     public String getLocation() {
