@@ -75,12 +75,14 @@ public class ShelterService {
     }
 
     //DELETE SINGLE
-
-    
-
-    // public void deleteShelter(UUID id) {
-    //     shelterRepository.deleteById(id);
-    // }
-
+    public boolean deleteShelterById(Long id) {
+    Optional<Shelter> shelterOptional = shelterRepository.findById(id);
+        if (shelterOptional.isPresent()) {
+            shelterRepository.delete(shelterOptional.get());
+            return true; // Shelter deleted successfully
+        } else {
+            return false; // Shelter not found
+        }
+    }
     
 }
