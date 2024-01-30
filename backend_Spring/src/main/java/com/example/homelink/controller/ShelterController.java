@@ -97,7 +97,5 @@ public class ShelterController {
             return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
         }
     }
-
-
   
 }

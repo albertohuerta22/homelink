@@ -3,6 +3,7 @@ com/example/homelink/repository/ChargerRepository.class
 com/example/homelink/HomeLinkApplication.class
 com/example/homelink/exception/ShelterNotFoundException.class
 com/example/homelink/service/ChargerService.class
+com/example/homelink/config/WebConfig.class
 com/example/homelink/entity/Shelter.class
 com/example/homelink/controller/ChargerController.class
 com/example/homelink/controller/ShelterController.class
