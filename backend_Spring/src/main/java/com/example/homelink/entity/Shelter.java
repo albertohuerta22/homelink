@@ -8,12 +8,10 @@ import jakarta.persistence.GenerationType;
 @Entity
 public class Shelter {
 
-    
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 
     private Long id;
-
     private String name;
     private Integer capacity;
     private String location;
@@ -62,6 +60,4 @@ public class Shelter {
     public void setLocation(String location) {
         this.location = location;
     }
-   
-
 }
