@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 
 //my local files
 import com.example.homelink.entity.Shelter;
+import com.example.homelink.exception.ShelterNotFoundException;
 import com.example.homelink.repository.ShelterRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.example.homelink.dto.ShelterDTO;
 
 @Service
@@ -32,7 +36,7 @@ public class ShelterService {
         System.out.println("Shelter not found for ID: " + id);
     }
     
-    return shelter;
+        return shelter;
     }
 
     //CREATE SINGLE
@@ -45,10 +49,30 @@ public class ShelterService {
     // Add any additional logic or validation if needed
 
     return shelterRepository.save(newShelter);
-}
+    }
 
 
     //UPDATE SINGLE
+     @Transactional
+    public Shelter updateShelter(Long id, ShelterDTO shelterDTO) {
+    Optional<Shelter> existingShelterOptional = shelterRepository.findById(id);
+
+    if (existingShelterOptional.isPresent()) {
+        Shelter existingShelter = existingShelterOptional.get();
+
+        // Add validation, e.g., check if the provided id matches the id in shelterDTO
+
+        // Update fields from DTO
+        existingShelter.setName(shelterDTO.getName());
+        existingShelter.setCapacity(shelterDTO.getCapacity());
+        existingShelter.setLocation(shelterDTO.getLocation());
+
+        // Save the updated shelter
+         return shelterRepository.save(existingShelter);
+        } else {
+        throw new ShelterNotFoundException("Shelter not found with id: " + id);
+    }
+    }
 
     //DELETE SINGLE
 

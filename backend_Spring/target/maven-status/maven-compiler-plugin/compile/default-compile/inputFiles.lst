@@ -1,4 +1,5 @@
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/dto/ShelterDTO.java
+/Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/exception/ShelterNotFoundException.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/controller/ShelterController.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/entity/Shelter.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/repository/ShelterRepository.java

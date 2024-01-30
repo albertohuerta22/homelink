@@ -9,13 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 import com.example.homelink.dto.ShelterDTO;
 //my local files
 import com.example.homelink.entity.Shelter;
+import com.example.homelink.exception.ShelterNotFoundException;
 import com.example.homelink.service.ShelterService;
 
 @RestController
@@ -45,7 +49,7 @@ public class ShelterController {
         }
     }
 
-    //POST
+    //CREATE SINGLE SHELTER
     @PostMapping("/create")
     public ResponseEntity<Shelter> createShelter(@RequestBody ShelterDTO shelterDTO) {
         try {
@@ -57,5 +61,19 @@ public class ShelterController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     } 
+
+    //UPDATE SHELTER
+    @PutMapping("/{id}")
+    public ResponseEntity<Shelter> updateShelter(@PathVariable Long id, @RequestBody ShelterDTO shelterDTO) {
+    try {
+        Shelter updatedShelter = shelterService.updateShelter(id, shelterDTO);
+        return new ResponseEntity<>(updatedShelter, HttpStatus.OK);
+    } catch (ShelterNotFoundException e) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    } catch (Exception e) {
+        System.out.println("Error updating shelter " +  e);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
   
 }
