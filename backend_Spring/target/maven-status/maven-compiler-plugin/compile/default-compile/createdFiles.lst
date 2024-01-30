@@ -1,5 +1,6 @@
 com/example/homelink/HomeLinkApplication$1.class
 com/example/homelink/HomeLinkApplication.class
+com/example/homelink/dto/ShelterDTO.class
 com/example/homelink/repository/ShelterRepository.class
 com/example/homelink/service/ShelterService.class
 com/example/homelink/entity/Shelter.class

@@ -10,7 +10,7 @@ public class Shelter {
 
     
 @Id
-@GeneratedValue(strategy=GenerationType.SEQUENCE)
+@GeneratedValue(strategy=GenerationType.IDENTITY)
 
     private Long id;
 
