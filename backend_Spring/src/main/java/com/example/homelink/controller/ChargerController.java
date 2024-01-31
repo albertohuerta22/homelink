@@ -50,7 +50,6 @@ public class ChargerController {
             return new ResponseEntity<>(charger, HttpStatus.OK);
         } else {
             // Charger not found, return 404
-            String errorMessage = "Charger with ID " + id + " not found";
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

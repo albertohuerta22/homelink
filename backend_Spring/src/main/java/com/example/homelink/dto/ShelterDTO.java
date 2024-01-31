@@ -1,40 +1,34 @@
 package com.example.homelink.dto;
 
 public class ShelterDTO {
-    private String name;
-    private Integer capacity;
-    private String location;
+    private String centerName;
+    private String borough;
+    private String address;
 
     // Constructors, if needed
 
-    // Getter for 'name'
-    public String getName() {
-        return name;
+    public String getCenterName() {
+        return centerName;
     }
 
-    // Setter for 'name'
-    public void setName(String name) {
-        this.name = name;
+    public void setCenterName(String centerName) {
+        this.centerName = centerName;
     }
 
-    // Getter for 'capacity'
-    public Integer getCapacity() {
-        return capacity;
+    public String getBorough() {
+        return this.borough;
     }
 
-    // Setter for 'capacity'
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
+    public void setBorough(String borough) {
+        this.borough = borough;
     }
 
-    // Getter for 'location'
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return address;
     }
 
-    // Setter for 'location'
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
 

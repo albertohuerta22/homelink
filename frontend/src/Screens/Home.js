@@ -8,7 +8,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await getShelters();
-        console.log(response);
+
         setShelters(response);
       } catch (error) {
         console.log('Error fetching data', error);
@@ -24,11 +24,9 @@ const Home = () => {
       <ul>
         {shelters.map((shelter) => (
           <div key={shelter.id}>
-            <li>{shelter.name}</li>
-            <li>
-              There are currently: {shelter.capacity} open slots at{' '}
-              {shelter.location}
-            </li>
+            <li>{shelter.centerName}</li>
+            <li>{shelter.address}</li>
+            <li>{shelter.borough}</li>
             <br />
           </div>
         ))}

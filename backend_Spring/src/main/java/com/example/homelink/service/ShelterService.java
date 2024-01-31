@@ -42,9 +42,9 @@ public class ShelterService {
     //CREATE SINGLE
     public Shelter createShelter(ShelterDTO shelterDTO) {
     Shelter newShelter = new Shelter();
-    newShelter.setName(shelterDTO.getName());
-    newShelter.setCapacity(shelterDTO.getCapacity());
-    newShelter.setLocation(shelterDTO.getLocation());
+    newShelter.setCenterName(shelterDTO.getCenterName());
+    newShelter.setBorough(shelterDTO.getBorough());
+    newShelter.setAddress(shelterDTO.getAddress());
 
     // Add any additional logic or validation if needed
 
@@ -63,9 +63,9 @@ public class ShelterService {
         // Add validation, e.g., check if the provided id matches the id in shelterDTO
 
         // Update fields from DTO
-        existingShelter.setName(shelterDTO.getName());
-        existingShelter.setCapacity(shelterDTO.getCapacity());
-        existingShelter.setLocation(shelterDTO.getLocation());
+        existingShelter.setCenterName(shelterDTO.getCenterName());
+        existingShelter.setBorough(shelterDTO.getBorough());
+        existingShelter.setAddress(shelterDTO.getAddress());
 
         // Save the updated shelter
          return shelterRepository.save(existingShelter);

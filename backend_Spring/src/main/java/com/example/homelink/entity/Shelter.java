@@ -12,19 +12,19 @@ public class Shelter {
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 
     private Long id;
-    private String name;
-    private Integer capacity;
-    private String location;
+    private String centerName;
+    private String borough;
+    private String address;
 
     public Shelter() {
         // Default constructor required by JPA
     }
 
-     public Shelter(String name, Integer capacity, String location, Long id) {
+     public Shelter(String centerName, String borough, String address, Long id) {
         this.id = id;
-        this.name = name;
-        this.capacity = capacity;
-        this.location = location;
+        this.centerName = centerName;
+        this.borough = borough;
+        this.address = address;
     }
 
     public Long getId() {
@@ -37,27 +37,27 @@ public class Shelter {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCenterName() {
+        return centerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCenterName(String centerName) {
+        this.centerName = centerName;
     }
 
-    public Integer getCapacity() {
-        return this.capacity;
+    public String getBorough() {
+        return this.borough;
     }
 
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
+    public void setBorough(String borough) {
+        this.borough = borough;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
