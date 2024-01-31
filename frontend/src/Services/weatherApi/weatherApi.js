@@ -7,7 +7,7 @@ const api = axios.create({
 
 export const getWeather = async () => {
   try {
-    const response = await api.get('/shelters');
+    const response = await api.get('/');
     return response.data;
   } catch (error) {
     console.error('Error fetching shelters', error);
