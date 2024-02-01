@@ -9,9 +9,11 @@ const Weather = () => {
     const fetchData = async () => {
       try {
         const response = await getWeather();
-        const [maxTempCelsius, minTempCelsius] = response;
-        setCurrentMax(maxTempCelsius);
-        setCurrentMin(minTempCelsius);
+
+        const maxTempFahrenheit = response.maxTempFahrenheit;
+        const minTempFahrenheit = response.minTempFahrenheit;
+        setCurrentMax(maxTempFahrenheit);
+        setCurrentMin(minTempFahrenheit);
       } catch (error) {
         console.log('Error fetching data', error);
       }
@@ -21,7 +23,7 @@ const Weather = () => {
 
   return (
     <div>
-      Hi, current weather in New York is: H{currentMax}/L{currentMin}.
+      Hi, current weather in New York is: H {currentMax} / L {currentMin}.
     </div>
   );
 };
