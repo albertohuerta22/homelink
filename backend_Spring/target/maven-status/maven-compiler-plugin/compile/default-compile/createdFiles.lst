@@ -1,3 +1,4 @@
+com/example/homelink/exception/handler/ErrorDetails.class
 com/example/homelink/HomeLinkApplication$1.class
 com/example/homelink/repository/ChargerRepository.class
 com/example/homelink/HomeLinkApplication.class
@@ -8,8 +9,10 @@ com/example/homelink/dto/WeatherApiResponseDTO$DailyData.class
 com/example/homelink/entity/Charger.class
 com/example/homelink/repository/ShelterRepository.class
 com/example/homelink/service/ShelterService.class
-com/example/homelink/exception/ShelterNotFoundException.class
+com/example/homelink/exception/handler/GlobalExceptionHandler.class
+com/example/homelink/exception/shelter/BadRequestException.class
 com/example/homelink/dto/WeatherApiResponseDTO$DailyTimeline.class
+com/example/homelink/exception/shelter/ShelterNotFoundException.class
 com/example/homelink/service/ChargerService.class
 com/example/homelink/config/WebConfig.class
 com/example/homelink/service/WeatherService.class
@@ -17,7 +20,7 @@ com/example/homelink/controller/ChargerController.class
 com/example/homelink/controller/ShelterController.class
 com/example/homelink/config/AppConfig.class
 com/example/homelink/controller/WeatherController.class
-com/example/homelink/exception/ChargerNotFoundException.class
+com/example/homelink/exception/charger/ChargerNotFoundException.class
 com/example/homelink/dto/ShelterDTO.class
 com/example/homelink/dto/ChargerDTO.class
 com/example/homelink/service/ApiKeyService.class

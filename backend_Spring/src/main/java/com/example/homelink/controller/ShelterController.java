@@ -58,8 +58,21 @@ public class ShelterController {
     @PostMapping("/create")
     public ResponseEntity<?> createShelter(@RequestBody ShelterDTO shelterDTO) {
     try {
-        // Your business logic here...
-        throw new BadRequestException("Detailed explanation of the bad request");
+         if (shelterDTO.getCenterName() == null || shelterDTO.getCenterName().trim().isEmpty()) {
+            throw new BadRequestException("Center name is required.");
+        }
+
+        if (shelterDTO.getAddress() == null || shelterDTO.getAddress().trim().isEmpty()) {
+            throw new BadRequestException("Address is required.");
+        }
+        if (shelterDTO.getBorough() == null || shelterDTO.getBorough().trim().isEmpty()) {
+            throw new BadRequestException("Borough is required.");
+        }
+
+        // If validation passes, proceed to create the shelter
+        Shelter createdShelter = shelterService.createShelter(shelterDTO);
+        return new ResponseEntity<>(createdShelter, HttpStatus.CREATED);
+   
     } catch (BadRequestException e) {
         // No need to catch BadRequestException here anymore as it's handled globally
         throw e; // Just rethrow it
