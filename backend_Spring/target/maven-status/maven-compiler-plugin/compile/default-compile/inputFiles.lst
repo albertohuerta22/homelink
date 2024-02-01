@@ -16,5 +16,6 @@
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/dto/WeatherDataDTO.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/entity/Charger.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/exception/ShelterNotFoundException.java
+/Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/config/AppConfig.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/exception/ChargerNotFoundException.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/controller/WeatherController.java

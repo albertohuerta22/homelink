@@ -4,10 +4,8 @@ import java.util.List;
 
 public class WeatherApiResponseDTO {
 
-    // Assume each 'DailyTimeline' represents a set of daily forecasts within the JSON response
     private List<DailyTimeline> timelines;
 
-    // Getter and setter for the list of 'DailyTimeline' objects
     public List<DailyTimeline> getTimelines() {
         return timelines;
     }
@@ -16,12 +14,9 @@ public class WeatherApiResponseDTO {
         this.timelines = timelines;
     }
 
-    // Static inner class representing a 'timeline' in the JSON response
     public static class DailyTimeline {
-        // Assume 'entries' represent individual forecast entries within a timeline
         private List<DailyData> entries;
 
-        // Getter and setter for the list of 'DailyData' objects
         public List<DailyData> getEntries() {
             return entries;
         }
@@ -31,12 +26,10 @@ public class WeatherApiResponseDTO {
         }
     }
 
-    // Another static inner class representing individual forecast data points within a 'DailyTimeline'
     public static class DailyData {
         private double temperatureMax;
         private double temperatureMin;
 
-        // Getters and setters for temperature data
         public double getTemperatureMax() {
             return temperatureMax;
         }
@@ -54,4 +47,3 @@ public class WeatherApiResponseDTO {
         }
     }
 }
-
