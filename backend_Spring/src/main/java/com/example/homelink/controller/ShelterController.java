@@ -99,17 +99,26 @@ public class ShelterController {
 
     //DELETE SHELTER
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteShelter(@PathVariable Long id) {
+    public ResponseEntity<?> deleteShelter(@PathVariable Long id) {
+    try {
         boolean deleted = shelterService.deleteShelterById(id);
 
-        if (deleted) {
-            String successMessage = "Shelter with ID " + id + " was deleted successfully.";
-            logger.info(successMessage); // Add this line for logging
-            return new ResponseEntity<>(successMessage, HttpStatus.NO_CONTENT);
-        } else {
-            String errorMessage = "Shelter not found with ID " + id;
-            logger.error(errorMessage); // Add this line for logging
-            return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+        if (!deleted) {
+            // If the shelter is not found or cannot be deleted, throw a custom NotFoundException
+            throw new ShelterNotFoundException("Shelter not found with ID " + id);
+        }
+
+        // If deletion is successful, log the action and return a 204 No Content response
+        String successMessage = "Shelter with ID " + id + " was deleted successfully.";
+        logger.info(successMessage);
+        return ResponseEntity.noContent().build(); // More idiomatic way to return a 204 No Content
+    } catch (ShelterNotFoundException e) {
+            // No need to catch if you are rethrowing, unless you need to log or perform some action before rethrowing
+            throw e;
+    } catch (Exception e) {
+            // Log unexpected errors and rethrow to be handled by the global exception handler
+            logger.error("Unexpected error occurred while deleting shelter with ID " + id, e);
+            throw new RuntimeException("Internal server error occurred while deleting shelter.");
         }
     }
   
