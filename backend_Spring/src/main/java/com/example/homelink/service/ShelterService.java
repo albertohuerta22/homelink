@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 //my local files
 import com.example.homelink.entity.Shelter;
-import com.example.homelink.exception.ShelterNotFoundException;
+import com.example.homelink.exception.shelter.ShelterNotFoundException;
 import com.example.homelink.repository.ShelterRepository;
 
 import jakarta.transaction.Transactional;

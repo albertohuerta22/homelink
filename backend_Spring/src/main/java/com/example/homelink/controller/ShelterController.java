@@ -1,7 +1,6 @@
 package com.example.homelink.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.homelink.dto.ShelterDTO;
 //my local files
 import com.example.homelink.entity.Shelter;
-import com.example.homelink.exception.ShelterNotFoundException;
+import com.example.homelink.exception.shelter.BadRequestException;
+import com.example.homelink.exception.shelter.ShelterNotFoundException;
+
 import com.example.homelink.service.ShelterService;
 
 @RestController
@@ -37,36 +38,37 @@ public class ShelterController {
 
     @GetMapping
     public List<Shelter> getAllShelters() {
-        return shelterService.getAllShelters();
+    List<Shelter> shelters = shelterService.getAllShelters();
+        if (shelters.isEmpty()) {
+            throw new ShelterNotFoundException("No Available Shelters");
+        }
+        return shelters;
     }
+
 
     //GET SINGLE SHELTER
     @GetMapping("/{id}")
     public ResponseEntity<Shelter> getShelterById(@PathVariable Long id) {
-    System.out.println("Received ID: " + id);
-    Optional<Shelter> shelterOptional = shelterService.getShelterById(id);
-
-        if (shelterOptional.isPresent()) {
-            Shelter shelter = shelterOptional.get();
-            return new ResponseEntity<>(shelter, HttpStatus.OK);
-        } else {
-            // Shelter not found, return 404
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    Shelter shelter = shelterService.getShelterById(id)
+        .orElseThrow(() -> new ShelterNotFoundException("Shelter not found with ID: " + id));
+    return new ResponseEntity<>(shelter, HttpStatus.OK);
     }
 
     //CREATE SINGLE SHELTER
     @PostMapping("/create")
-    public ResponseEntity<Shelter> createShelter(@RequestBody ShelterDTO shelterDTO) {
-        try {
-        Shelter createdShelter = shelterService.createShelter(shelterDTO);
-        return new ResponseEntity<>(createdShelter, HttpStatus.CREATED);
-        } catch (Exception e) {
-            // Log the exception and return an appropriate response, e.g., internal server error (500)
-            e.printStackTrace();  // Use a logging framework like SLF4J for proper logging
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    } 
+    public ResponseEntity<?> createShelter(@RequestBody ShelterDTO shelterDTO) {
+    try {
+        // Your business logic here...
+        throw new BadRequestException("Detailed explanation of the bad request");
+    } catch (BadRequestException e) {
+        // No need to catch BadRequestException here anymore as it's handled globally
+        throw e; // Just rethrow it
+    } catch (Exception e) {
+        // Handle other exceptions
+        logger.error("Unexpected error: ", e);
+        throw e;
+    }
+}
 
     //UPDATE SHELTER
     @PutMapping("/{id}")

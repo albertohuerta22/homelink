@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 //my local files
 import com.example.homelink.entity.Charger;
-import com.example.homelink.exception.ChargerNotFoundException;
+import com.example.homelink.exception.charger.ChargerNotFoundException;
 import com.example.homelink.repository.ChargerRepository;
 
 import jakarta.transaction.Transactional;

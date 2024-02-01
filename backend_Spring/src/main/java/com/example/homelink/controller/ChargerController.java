@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //my local files
 import com.example.homelink.entity.Charger;
-import com.example.homelink.exception.ChargerNotFoundException;
+import com.example.homelink.exception.charger.ChargerNotFoundException;
 import com.example.homelink.service.ChargerService;
 import com.example.homelink.dto.ChargerDTO;
 
