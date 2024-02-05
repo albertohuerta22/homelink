@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -31,6 +30,8 @@ import com.example.homelink.entity.Shelter;
 import com.example.homelink.exception.shelter.ShelterNotFoundException;
 import com.example.homelink.service.ShelterService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
 @WebMvcTest(ShelterController.class)
 @TestPropertySource(properties = "server.port=8082")
 public class ShelterControllerTests {
