@@ -9,16 +9,21 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
+import com.example.homelink.dto.ShelterDTO;
 import com.example.homelink.entity.Shelter;
 import com.example.homelink.service.ShelterService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 @WebMvcTest(ShelterController.class)
 @TestPropertySource(properties = "server.port=8082")
 public class ShelterControllerTests {
@@ -93,6 +98,46 @@ public class ShelterControllerTests {
             .andExpect(jsonPath("$.borough").value("Manhattan"))
             .andExpect(jsonPath("$.address").value("Address1"));
     // Omit the ID check in the response if the client isn't supposed to set it or if it's not relevant to what you're testing
+    }
+
+
+    //UPDATE SHELTER
+    @SuppressWarnings("null")
+    @Test
+    void updateShelter() throws Exception {
+    // Arrange
+    Long shelterId = 1L; // The ID of the shelter to update
+
+    // Original shelter attributes before update
+    Shelter originalShelter = new Shelter("Original Shelter Name", "Original Borough", "Address1");
+    originalShelter.setId(shelterId); // Assuming the ID is set to simulate the existing shelter
+
+    // New attributes for the update
+    ShelterDTO shelterUpdateDTO = new ShelterDTO();
+    shelterUpdateDTO.setCenterName("Updated Shelter Name");
+    shelterUpdateDTO.setBorough("Updated Borough");
+    shelterUpdateDTO.setAddress("Address2"); // Updated address
+
+    // Expected shelter after the update
+    Shelter updatedShelter = new Shelter("Updated Shelter Name", "Updated Borough", "Address2");
+    updatedShelter.setId(shelterId); // Set the ID to simulate the updated shelter returned by the service
+
+    // Mock the behavior of the shelter service to return the updated shelter when updateShelter is called
+    given(shelterService.updateShelter(eq(shelterId), any(ShelterDTO.class))).willReturn(updatedShelter);
+
+    // Convert ShelterDTO to JSON for the request body
+    String shelterDTOJson = new ObjectMapper().writeValueAsString(shelterUpdateDTO);
+
+    // Act & Assert
+    mockMvc.perform(put("/shelters/{id}", shelterId)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(shelterDTOJson))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.id").value(shelterId))
+            .andExpect(jsonPath("$.centerName").value("Updated Shelter Name"))
+            .andExpect(jsonPath("$.borough").value("Updated Borough"))
+            .andExpect(jsonPath("$.address").value("Address2")); // Verify the address was updated to "Address2"
     }
 
 
