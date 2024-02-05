@@ -20,8 +20,7 @@ public class Shelter {
         // Default constructor required by JPA
     }
 
-     public Shelter(String centerName, String borough, String address, Long id) {
-        this.id = id;
+     public Shelter(String centerName, String borough, String address) {
         this.centerName = centerName;
         this.borough = borough;
         this.address = address;

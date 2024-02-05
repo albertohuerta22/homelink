@@ -10,7 +10,6 @@ import com.example.homelink.entity.Charger;
 import com.example.homelink.exception.charger.ChargerNotFoundException;
 import com.example.homelink.repository.ChargerRepository;
 
-import jakarta.transaction.Transactional;
 
 import com.example.homelink.dto.ChargerDTO;
 
@@ -19,6 +18,7 @@ public class ChargerService {
 
     @Autowired
     private ChargerRepository ChargerRepository;
+    
     //GET ALL ChargerS
     public List<Charger> getAllChargers() {
         return ChargerRepository.findAll();
@@ -28,6 +28,7 @@ public class ChargerService {
     //GET SINGLE Charger
     public Optional<Charger> getChargerById(Long id) {
     System.out.println("Searching for charger with ID: " + id);
+    @SuppressWarnings("null")
     Optional<Charger> charger = ChargerRepository.findById(id);
     
     if (charger.isPresent()) {
@@ -52,8 +53,8 @@ public class ChargerService {
 
 
     //UPDATE SINGLE
-     @Transactional
     public Charger updateCharger(Long id, ChargerDTO chargerDTO) {
+    @SuppressWarnings("null")
     Optional<Charger> existingChargerOptional = ChargerRepository.findById(id);
 
         if (existingChargerOptional.isPresent()) {
@@ -73,6 +74,7 @@ public class ChargerService {
     }
 
     //DELETE SINGLE
+    @SuppressWarnings("null")
     public boolean deleteChargerById(Long id) {
     Optional<Charger> chargerOptional = ChargerRepository.findById(id);
         if (chargerOptional.isPresent()) {

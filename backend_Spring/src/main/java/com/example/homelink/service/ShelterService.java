@@ -10,7 +10,6 @@ import com.example.homelink.entity.Shelter;
 import com.example.homelink.exception.shelter.ShelterNotFoundException;
 import com.example.homelink.repository.ShelterRepository;
 
-import jakarta.transaction.Transactional;
 
 import com.example.homelink.dto.ShelterDTO;
 
@@ -28,6 +27,7 @@ public class ShelterService {
     //GET SINGLE SHELTER
     public Optional<Shelter> getShelterById(Long id) {
     System.out.println("Searching for shelter with ID: " + id);
+    @SuppressWarnings("null")
     Optional<Shelter> shelter = shelterRepository.findById(id);
     
     if (shelter.isPresent()) {
@@ -53,8 +53,8 @@ public class ShelterService {
 
 
     //UPDATE SINGLE
-     @Transactional
     public Shelter updateShelter(Long id, ShelterDTO shelterDTO) {
+    @SuppressWarnings("null")
     Optional<Shelter> existingShelterOptional = shelterRepository.findById(id);
 
     if (existingShelterOptional.isPresent()) {
@@ -75,6 +75,7 @@ public class ShelterService {
     }
 
     //DELETE SINGLE
+    @SuppressWarnings("null")
     public boolean deleteShelterById(Long id) {
     Optional<Shelter> shelterOptional = shelterRepository.findById(id);
         if (shelterOptional.isPresent()) {

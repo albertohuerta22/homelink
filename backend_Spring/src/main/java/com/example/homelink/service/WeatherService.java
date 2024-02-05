@@ -46,6 +46,7 @@ public class WeatherService {
     if (cachedData != null) {
             return cachedData;
     } else {
+        @SuppressWarnings("null")
         URI url = UriComponentsBuilder.fromHttpUrl(baseUrl)
       .queryParam("location", latitude + "," + longitude)
       .queryParam("apikey", apiKey)
@@ -53,10 +54,11 @@ public class WeatherService {
       .toUri();
 
           
-
-      WeatherApiResponseDTO.DailyData response = restTemplate.getForObject(url, WeatherApiResponseDTO.DailyData.class);
-
       
+      WeatherApiResponseDTO.DailyData response = restTemplate.getForObject(url, WeatherApiResponseDTO.DailyData.class);
+      
+      
+      @SuppressWarnings("null")
       //conversion to farenheit
       double minTempCelsius = response.getTemperatureMin();
       double maxTempCelsius = response.getTemperatureMax();

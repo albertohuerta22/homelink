@@ -23,6 +23,7 @@ public class HomeLinkApplication {
                         Collectors.toMap(DotenvEntry::getKey, DotenvEntry::getValue));
         new SpringApplicationBuilder(HomeLinkApplication.class)
                 .environment(new StandardEnvironment() {
+                    @SuppressWarnings("null")
                     @Override
                     protected void customizePropertySources(MutablePropertySources propertySources) {
                         super.customizePropertySources(propertySources);
