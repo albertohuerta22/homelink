@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 
@@ -28,6 +29,8 @@ public class ShelterControllerTests {
     @MockBean
     private ShelterService shelterService;
 
+
+    //GET ALL SHELTERTS
     @SuppressWarnings("null")
     @Test
     void getAllShelters() throws Exception {
@@ -46,4 +49,51 @@ public class ShelterControllerTests {
                 .andExpect(jsonPath("$.length()").value(allShelters.size()));
                 // You can add more expect() statements to verify the details of the shelters
     }
+
+    
+    //GET SINGLE SHELTER
+    @SuppressWarnings("null")
+    @Test
+    void getShelterById() throws Exception {
+    // Arrange
+    Long shelterId = 1L; // Simulated ID that would be auto-generated
+    Shelter expectedShelter = new Shelter("Shelter 1", "Manhattan", "Address1");
+    // Assuming the ID is set internally, e.g., by the service layer or the database
+
+    given(shelterService.getShelterById(shelterId)).willReturn(Optional.of(expectedShelter));
+
+    // Act & Assert
+    mockMvc.perform(get("/shelters/{id}", shelterId)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.centerName").value("Shelter 1"))
+            .andExpect(jsonPath("$.borough").value("Manhattan"))
+            .andExpect(jsonPath("$.address").value("Address1"));
+    // Omit the ID check in the response if the client isn't supposed to set it or if it's not relevant to what you're testing
+    }
+
+    //CREATE SINGLE SHELTER
+    @SuppressWarnings("null")
+    @Test
+    void createShelter() throws Exception {
+    // Arrange
+    Long shelterId = 1L; // Simulated ID that would be auto-generated
+    Shelter expectedShelter = new Shelter("Shelter 1", "Manhattan", "Address1");
+    // Assuming the ID is set internally, e.g., by the service layer or the database
+
+    given(shelterService.getShelterById(shelterId)).willReturn(Optional.of(expectedShelter));
+
+    // Act & Assert
+    mockMvc.perform(get("/shelters/{id}", shelterId)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.centerName").value("Shelter 1"))
+            .andExpect(jsonPath("$.borough").value("Manhattan"))
+            .andExpect(jsonPath("$.address").value("Address1"));
+    // Omit the ID check in the response if the client isn't supposed to set it or if it's not relevant to what you're testing
+    }
+
+
 }
