@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -16,12 +17,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import com.example.homelink.dto.ShelterDTO;
 import com.example.homelink.entity.Shelter;
+import com.example.homelink.exception.shelter.ShelterNotFoundException;
 import com.example.homelink.service.ShelterService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @WebMvcTest(ShelterController.class)
@@ -139,6 +146,43 @@ public class ShelterControllerTests {
             .andExpect(jsonPath("$.borough").value("Updated Borough"))
             .andExpect(jsonPath("$.address").value("Address2")); // Verify the address was updated to "Address2"
     }
+
+    //Delete Shelter 
+    @Test
+    void deleteShelter_Success() throws Exception {
+    Long existingShelterId = 1L;
+
+    // Assuming deleteShelterById returns a boolean
+    given(shelterService.deleteShelterById(existingShelterId)).willReturn(true);
+
+    mockMvc.perform(delete("/shelters/{id}", existingShelterId))
+            .andExpect(status().isNoContent());
+
+    verify(shelterService).deleteShelterById(existingShelterId);
+    }
+
+
+    @SuppressWarnings("null")
+    void deleteShelter_NotFound() throws Exception {
+        // Arrange
+        Long nonExistentShelterId = 999L; // An ID that does not exist in the database
+
+        // Mock the shelter service to throw ShelterNotFoundException when trying to delete a non-existent shelter
+        willThrow(new ShelterNotFoundException("Shelter not found with ID: " + nonExistentShelterId))
+                .given(shelterService).deleteShelterById(nonExistentShelterId);
+
+        // Act & Assert
+        mockMvc.perform(delete("/shelters/{id}", nonExistentShelterId)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound()) // Expecting a 404 Not Found response
+                .andExpect(result -> assertTrue(result.getResponse().getContentAsString().contains("Shelter not found with ID: " + nonExistentShelterId),
+                        "The response should contain the error message: Shelter not found with ID: " + nonExistentShelterId));
+
+        // Optionally, verify that the service method was called
+        verify(shelterService, times(1)).deleteShelterById(nonExistentShelterId);
+    }
+
+
 
 
 }
