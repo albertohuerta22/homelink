@@ -21,7 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 //my local files
 import com.example.homelink.entity.Charger;
 import com.example.homelink.exception.charger.ChargerNotFoundException;
+import com.example.homelink.exception.shelter.BadRequestException;
 import com.example.homelink.service.ChargerService;
+
+import jakarta.validation.Valid;
+
 import com.example.homelink.dto.ChargerDTO;
 
 @RestController
@@ -55,17 +59,25 @@ public class ChargerController {
     }
 
     //CREATE SINGLE CHARGER
+    @SuppressWarnings("null")
     @PostMapping("/create")
-    public ResponseEntity<Charger> createCharger(@RequestBody ChargerDTO chargerDTO) {
-        try {
+    public ResponseEntity<Charger> createCharger(@Valid @RequestBody ChargerDTO chargerDTO) {
+    // Validate the ChargerDTO fields manually
+    if (chargerDTO.getName() == null || chargerDTO.getName().trim().isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Name is required
+    }
+    // You can add more validation checks for other fields here
+
+    try {
         Charger createdCharger = ChargerService.createCharger(chargerDTO);
         return new ResponseEntity<>(createdCharger, HttpStatus.CREATED);
-        } catch (Exception e) {
-            // Log the exception and return an appropriate response, e.g., internal server error (500)
-            e.printStackTrace();  // Use a logging framework like SLF4J for proper logging
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    } 
+    } catch (BadRequestException e) {
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    } catch (Exception e) {
+        logger.error("Unexpected error: ", e);
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
 
     //UPDATE CHARGER
     @PutMapping("/{id}")
