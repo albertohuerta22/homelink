@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.homelink.controller.ShelterControllerTests" time="2.441" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.homelink.controller.WeatherControllerTest$WeatherTests" time="0.455" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -64,9 +64,11 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="getAllShelters" classname="com.example.homelink.controller.ShelterControllerTests" time="0.226">
-    <system-out><![CDATA[15:07:39.120 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.homelink.controller.ShelterControllerTests]: ShelterControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-15:07:39.216 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.homelink.HomeLinkApplication for test class com.example.homelink.controller.ShelterControllerTests
+  <testcase name="getWeather_Success" classname="com.example.homelink.controller.WeatherControllerTest$WeatherTests" time="0.02">
+    <system-out><![CDATA[2024-02-06T15:07:41.439-05:00  INFO 94131 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.homelink.controller.WeatherControllerTest]: WeatherControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-06T15:07:41.453-05:00  INFO 94131 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.homelink.HomeLinkApplication for test class com.example.homelink.controller.WeatherControllerTest
+2024-02-06T15:07:41.458-05:00  INFO 94131 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.homelink.controller.WeatherControllerTest$WeatherTests]: WeatherTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-06T15:07:41.470-05:00  INFO 94131 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.homelink.HomeLinkApplication for test class com.example.homelink.controller.WeatherControllerTest$WeatherTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -76,24 +78,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2024-02-06T15:07:39.476-05:00  INFO 94131 --- [           main] c.e.h.controller.ShelterControllerTests  : Starting ShelterControllerTests using Java 21.0.1 with PID 94131 (started by albertohuerta in /Users/albertohuerta/Projects/home-link/backend_Spring)
-2024-02-06T15:07:39.477-05:00  INFO 94131 --- [           main] c.e.h.controller.ShelterControllerTests  : No active profile set, falling back to 1 default profile: "default"
-2024-02-06T15:07:41.048-05:00  INFO 94131 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-02-06T15:07:41.049-05:00  INFO 94131 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-02-06T15:07:41.052-05:00  INFO 94131 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2024-02-06T15:07:41.086-05:00  INFO 94131 --- [           main] c.e.h.controller.ShelterControllerTests  : Started ShelterControllerTests in 1.815 seconds (process running for 2.551)
-]]></system-out>
-    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/albertohuerta/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.10/byte-buddy-agent-1.14.10.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
-  </testcase>
-  <testcase name="deleteShelter_Success" classname="com.example.homelink.controller.ShelterControllerTests" time="0.023">
-    <system-out><![CDATA[2024-02-06T15:07:41.352-05:00  INFO 94131 --- [           main] c.e.h.controller.ShelterController       : Shelter with ID 1 was deleted successfully.
+2024-02-06T15:07:41.523-05:00  INFO 94131 --- [           main] c.e.h.controller.WeatherControllerTest   : Starting WeatherControllerTest using Java 21.0.1 with PID 94131 (started by albertohuerta in /Users/albertohuerta/Projects/home-link/backend_Spring)
+2024-02-06T15:07:41.523-05:00  INFO 94131 --- [           main] c.e.h.controller.WeatherControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2024-02-06T15:07:41.847-05:00  INFO 94131 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-02-06T15:07:41.847-05:00  INFO 94131 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-02-06T15:07:41.847-05:00  INFO 94131 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-02-06T15:07:41.853-05:00  INFO 94131 --- [           main] c.e.h.controller.WeatherControllerTest   : Started WeatherControllerTest in 0.377 seconds (process running for 3.318)
 ]]></system-out>
   </testcase>
-  <testcase name="getShelterById" classname="com.example.homelink.controller.ShelterControllerTests" time="0.01"/>
-  <testcase name="createShelter" classname="com.example.homelink.controller.ShelterControllerTests" time="0.006"/>
-  <testcase name="updateShelter" classname="com.example.homelink.controller.ShelterControllerTests" time="0.04"/>
+  <testcase name="getWeather_ServiceThrowsException" classname="com.example.homelink.controller.WeatherControllerTest$WeatherTests" time="0.021"/>
+  <testcase name="getWeather_InvalidParameters" classname="com.example.homelink.controller.WeatherControllerTest$WeatherTests" time="0.008"/>
 </testsuite>

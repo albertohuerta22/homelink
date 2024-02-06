@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.example.homelink.exception.shelter.BadRequestException;
 import com.example.homelink.exception.shelter.ShelterNotFoundException;
@@ -46,5 +47,11 @@ public class GlobalExceptionHandler {
 
         ErrorDetails errorDetails = new ErrorDetails("Validation Failed", String.join(", ", validationErrors));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<String> handleTypeMismatchException(MethodArgumentTypeMismatchException e) {
+        // Log the error or handle it as needed
+        return ResponseEntity.badRequest().body("Invalid request parameter: " + e.getMessage());
     }
 }
