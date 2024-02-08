@@ -9,17 +9,23 @@ const Weather = () => {
     const fetchData = async () => {
       try {
         const response = await getWeather();
-
-        const maxTempFahrenheit = response.maxTempFahrenheit;
-        const minTempFahrenheit = response.minTempFahrenheit;
-        setCurrentMax(maxTempFahrenheit);
-        setCurrentMin(minTempFahrenheit);
+        const dailyArray = response.data.timelines.daily;
+        const firstDayData = dailyArray[0];
+        const values = firstDayData.values;
+        const maxTempFahrenheit = values.temperatureMax;
+        const minTempFahrenheit = values.temperatureMin;
+        setCurrentMax(convertCelsiusToFahrenheit(maxTempFahrenheit));
+        setCurrentMin(convertCelsiusToFahrenheit(minTempFahrenheit));
       } catch (error) {
         console.log('Error fetching data', error);
       }
     };
     fetchData();
   }, []);
+
+  function convertCelsiusToFahrenheit(celsius) {
+    return Math.round((celsius * 9) / 5 + 32);
+  }
 
   return (
     <div>
