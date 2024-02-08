@@ -6,14 +6,34 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await getShelters();
+      // Define a unique key for the shelters data cache
+      const cacheKey = 'sheltersData';
+      // Try to get cached shelters data
+      const cachedData = localStorage.getItem(cacheKey);
+      let sheltersData;
 
-        setShelters(response);
-      } catch (error) {
-        console.log('Error fetching data', error);
+      if (cachedData) {
+        // Parse the cached JSON data
+        sheltersData = JSON.parse(cachedData);
+        // Optionally, you could implement a cache validation check here as well
       }
+
+      if (!sheltersData) {
+        try {
+          const response = await getShelters();
+          sheltersData = response;
+          // Store the new data in local storage
+          localStorage.setItem(cacheKey, JSON.stringify(sheltersData));
+        } catch (error) {
+          console.log('Error fetching data', error);
+          return;
+        }
+      }
+
+      // Set state with either cached or fetched data
+      setShelters(sheltersData);
     };
+
     fetchData();
   }, []);
 
