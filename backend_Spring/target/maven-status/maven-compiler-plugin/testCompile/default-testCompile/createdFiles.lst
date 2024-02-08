@@ -1,5 +1,7 @@
 com/example/homelink/controller/ShelterControllerTests.class
+com/example/homelink/controller/WeatherControllerTest.class
 com/example/homelink/controller/ChargerControllerTests.class
+com/example/homelink/controller/WeatherControllerTest$WeatherTests.class
 com/example/homelink/controller/ChargerControllerTests$CreateChargerTests.class
 com/example/homelink/controller/ChargerControllerTests$GetChargerByIdTests.class
 com/example/homelink/controller/ChargerControllerTests$GetAllChargersTests.class

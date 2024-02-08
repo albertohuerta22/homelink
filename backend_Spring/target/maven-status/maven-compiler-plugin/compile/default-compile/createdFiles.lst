@@ -2,10 +2,11 @@ com/example/homelink/exception/handler/ErrorDetails.class
 com/example/homelink/HomeLinkApplication$1.class
 com/example/homelink/repository/ChargerRepository.class
 com/example/homelink/HomeLinkApplication.class
+com/example/homelink/dto/WeatherApiResponseDTO$DailyTimeline$DailyValues.class
 com/example/homelink/dto/WeatherApiResponseDTO.class
 com/example/homelink/config/ApiKeyConfig.class
 com/example/homelink/entity/Shelter.class
-com/example/homelink/dto/WeatherApiResponseDTO$DailyData.class
+com/example/homelink/config/CacheConfig.class
 com/example/homelink/entity/Charger.class
 com/example/homelink/repository/ShelterRepository.class
 com/example/homelink/service/ShelterService.class

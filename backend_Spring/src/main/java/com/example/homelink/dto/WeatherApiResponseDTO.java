@@ -2,6 +2,8 @@ package com.example.homelink.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class WeatherApiResponseDTO {
 
     private List<DailyTimeline> timelines;
@@ -15,28 +17,23 @@ public class WeatherApiResponseDTO {
     }
 
     public static class DailyTimeline {
-        private List<DailyData> entries;
+    @JsonProperty("values")
+    private DailyValues values;
 
-        public List<DailyData> getEntries() {
-            return entries;
-        }
-
-        public void setEntries(List<DailyData> entries) {
-            this.entries = entries;
-        }
+    public DailyValues getValues() {
+        return values;
     }
 
-    public static class DailyData {
-        private double temperatureMax;
+    public void setValues(DailyValues values) {
+        this.values = values;
+    }
+
+    public static class DailyValues {
+        @JsonProperty("temperatureMin")
         private double temperatureMin;
 
-        public double getTemperatureMax() {
-            return temperatureMax;
-        }
-
-        public void setTemperatureMax(double temperatureMax) {
-            this.temperatureMax = temperatureMax;
-        }
+        @JsonProperty("temperatureMax")
+        private double temperatureMax;
 
         public double getTemperatureMin() {
             return temperatureMin;
@@ -45,5 +42,14 @@ public class WeatherApiResponseDTO {
         public void setTemperatureMin(double temperatureMin) {
             this.temperatureMin = temperatureMin;
         }
+
+        public double getTemperatureMax() {
+            return temperatureMax;
+        }
+
+        public void setTemperatureMax(double temperatureMax) {
+            this.temperatureMax = temperatureMax;
+        }
+    }
     }
 }
