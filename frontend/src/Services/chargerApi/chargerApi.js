@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
 });
 
-export const getShelters = async () => {
+export const getChargers = async () => {
   try {
     const response = await api.get('/chargers');
     console.log(response);
