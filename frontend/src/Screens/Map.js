@@ -1,7 +1,12 @@
-import React from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import React, { useState } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const Map = () => {
+  const [locations, setLocations] = useState({
+    shelters: [],
+    chargers: [],
+  });
+
   const mapContainerStyle = {
     height: '400px',
     width: '100%',
@@ -17,6 +22,12 @@ const Map = () => {
       googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
       libraries={['places']} // Add additional libraries as needed
     >
+      {locations.shelters.map((shelter) => (
+        <Marker
+          key={shelter.id}
+          position={{ lat: shelter.latitude, lng: shelter.longitude }}
+        />
+      ))}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
