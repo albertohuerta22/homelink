@@ -1,40 +1,35 @@
-import React, { useState } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
-const Map = () => {
-  const [locations, setLocations] = useState({
-    shelters: [],
-    chargers: [],
-  });
-
-  const mapContainerStyle = {
-    height: '400px',
-    width: '100%',
-  };
-
-  const center = {
-    lat: 40.7128,
-    lng: -74.006,
-  };
+const MapComponent = ({ locations = [] }) => {
+  const center = [40.7128, -74.006]; // Central point for the map (e.g., New York)
 
   return (
-    <LoadScript
-      googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-      libraries={['places']} // Add additional libraries as needed
+    <MapContainer
+      center={center}
+      zoom={13}
+      style={{ height: '400px', width: '100%' }}
     >
-      {locations.shelters.map((shelter) => (
-        <Marker
-          key={shelter.id}
-          position={{ lat: shelter.latitude, lng: shelter.longitude }}
-        />
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      {locations.map((location, idx) => (
+        <Marker key={idx} position={[location.lat, location.lng]}>
+          <Popup>
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open in Google Maps
+            </a>
+          </Popup>
+        </Marker>
       ))}
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={12} //smaller is out; bigger is closer
-      ></GoogleMap>
-    </LoadScript>
+    </MapContainer>
   );
 };
 
-export default Map;
+export default MapComponent;

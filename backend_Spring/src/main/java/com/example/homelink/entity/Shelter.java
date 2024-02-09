@@ -15,15 +15,19 @@ public class Shelter {
     private String centerName;
     private String borough;
     private String address;
+    private double latitude;
+    private double longitude;
 
     public Shelter() {
         // Default constructor required by JPA
     }
 
-     public Shelter(String centerName, String borough, String address) {
+     public Shelter(String centerName, String borough, String address, double latitude, double longitude) {
         this.centerName = centerName;
         this.borough = borough;
         this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Long getId() {
@@ -58,5 +62,21 @@ public class Shelter {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public double getLatitude(){
+        return latitude;
+    }
+
+    public void setLatitude(double latitude){
+        this.latitude = latitude;
+    }
+
+    public double getLongitude(){
+        return longitude;
+    }
+
+    public void setLongitude(double longitude){
+        this.longitude = longitude;
     }
 }

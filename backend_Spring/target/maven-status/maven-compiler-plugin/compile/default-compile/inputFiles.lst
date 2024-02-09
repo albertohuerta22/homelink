@@ -20,6 +20,7 @@
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/exception/shelter/BadRequestException.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/dto/ShelterDTO.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/dto/WeatherDataDTO.java
+/Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/controller/MapController.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/exception/handler/GlobalExceptionHandler.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/exception/shelter/ShelterNotFoundException.java
 /Users/albertohuerta/Projects/home-link/backend_Spring/src/main/java/com/example/homelink/config/AppConfig.java

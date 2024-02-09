@@ -48,8 +48,8 @@ public class ShelterControllerTests {
     @Test
     void getAllShelters() throws Exception {
         // Arrange
-        Shelter shelter1 = new Shelter("Shelter 1", "Manthattan", "Address1"); // Set properties for shelter1 as needed
-        Shelter shelter2 = new Shelter("Shelter 2", "Manhattan", "Address2"); // Set properties for shelter2 as needed
+        Shelter shelter1 = new Shelter("Shelter 1", "Manthattan", "Address1", 40.712776, -74.005974); // Set properties for shelter1 as needed
+        Shelter shelter2 = new Shelter("Shelter 2", "Manhattan", "Address2", 40.712776, -74.005974); // Set properties for shelter2 as needed
         List<Shelter> allShelters = Arrays.asList(shelter1, shelter2);
         
         given(shelterService.getAllShelters()).willReturn(allShelters);
@@ -70,7 +70,7 @@ public class ShelterControllerTests {
     void getShelterById() throws Exception {
     // Arrange
     Long shelterId = 1L; // Simulated ID that would be auto-generated
-    Shelter expectedShelter = new Shelter("Shelter 1", "Manhattan", "Address1");
+    Shelter expectedShelter = new Shelter("Shelter 1", "Manhattan", "Address1", 40.712776, -74.005974);
     // Assuming the ID is set internally, e.g., by the service layer or the database
 
     given(shelterService.getShelterById(shelterId)).willReturn(Optional.of(expectedShelter));
@@ -92,7 +92,7 @@ public class ShelterControllerTests {
     void createShelter() throws Exception {
     // Arrange
     Long shelterId = 1L; // Simulated ID that would be auto-generated
-    Shelter expectedShelter = new Shelter("Shelter 1", "Manhattan", "Address1");
+    Shelter expectedShelter = new Shelter("Shelter 1", "Manhattan", "Address1", 40.712776, -74.005974);
     // Assuming the ID is set internally, e.g., by the service layer or the database
 
     given(shelterService.getShelterById(shelterId)).willReturn(Optional.of(expectedShelter));
@@ -117,7 +117,7 @@ public class ShelterControllerTests {
     Long shelterId = 1L; // The ID of the shelter to update
 
     // Original shelter attributes before update
-    Shelter originalShelter = new Shelter("Original Shelter Name", "Original Borough", "Address1");
+    Shelter originalShelter = new Shelter("Original Shelter Name", "Original Borough", "Address1", 40.712776, -74.005974);
     originalShelter.setId(shelterId); // Assuming the ID is set to simulate the existing shelter
 
     // New attributes for the update
@@ -127,7 +127,7 @@ public class ShelterControllerTests {
     shelterUpdateDTO.setAddress("Address2"); // Updated address
 
     // Expected shelter after the update
-    Shelter updatedShelter = new Shelter("Updated Shelter Name", "Updated Borough", "Address2");
+    Shelter updatedShelter = new Shelter("Updated Shelter Name", "Updated Borough", "Address2", 40.712776, -74.005974);
     updatedShelter.setId(shelterId); // Set the ID to simulate the updated shelter returned by the service
 
     // Mock the behavior of the shelter service to return the updated shelter when updateShelter is called

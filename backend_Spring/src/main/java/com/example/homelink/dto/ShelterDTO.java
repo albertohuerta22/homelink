@@ -4,6 +4,8 @@ public class ShelterDTO {
     private String centerName;
     private String borough;
     private String address;
+    private Integer latitude;
+    private Integer longitude;
 
     // Constructors, if needed
 
@@ -29,6 +31,22 @@ public class ShelterDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Integer getLatitude(){
+        return latitude;
+    }
+
+    public void setLatitude(Integer latitude){
+        this.latitude = latitude;
+    }
+
+    public Integer getLongitude(){
+        return longitude;
+    }
+
+    public void setLongitude(Integer longitude){
+        this.longitude = longitude;
     }
 }
 
