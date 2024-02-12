@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.homelink.entity.Charger;
 import com.example.homelink.exception.charger.ChargerNotFoundException;
 import com.example.homelink.exception.shelter.BadRequestException;
+import com.example.homelink.exception.shelter.ShelterNotFoundException;
 import com.example.homelink.service.ChargerService;
 
 import jakarta.validation.Valid;
@@ -40,8 +41,13 @@ public class ChargerController {
 
     @GetMapping
     public List<Charger> getAllChargers() {
-        return ChargerService.getAllChargers();
+        List<Charger> chargers = ChargerService.getAllChargers();
+        if (chargers.isEmpty()) {
+            throw new ShelterNotFoundException("No Available Chargers");
+        }
+        return chargers;
     }
+    
 
     //GET SINGLE CHARGER
     @GetMapping("/{id}")
@@ -63,7 +69,7 @@ public class ChargerController {
     @PostMapping("/create")
     public ResponseEntity<Charger> createCharger(@Valid @RequestBody ChargerDTO chargerDTO) {
     // Validate the ChargerDTO fields manually
-    if (chargerDTO.getName() == null || chargerDTO.getName().trim().isEmpty()) {
+    if (chargerDTO.getStreetAddress() == null || chargerDTO.getStreetAddress().trim().isEmpty()) {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Name is required
     }
     // You can add more validation checks for other fields here

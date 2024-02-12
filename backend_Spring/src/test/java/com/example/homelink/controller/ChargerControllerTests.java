@@ -48,8 +48,8 @@ class ChargerControllerTests {
     @Test
     void getAllChargers_Success() throws Exception {
         // Arrange
-        Charger charger1 = new Charger("Charger1", "Location1", null);
-        Charger charger2 = new Charger("Charger2", "Location2", null);
+        Charger charger1 = new Charger("Charger1", "Location1", 40.712776, -74.005974);
+        Charger charger2 = new Charger("Charger2", "Location 1", 40.712776, -74.005974);
         List<Charger> allChargers = Arrays.asList(charger1, charger2);
         
         given(chargerService.getAllChargers()).willReturn(allChargers);
@@ -95,7 +95,7 @@ class ChargerControllerTests {
         @Test
         void getChargerById_Success() throws Exception {
             Long chargerId = 1L;
-            Charger charger = new Charger("Charger1", "Location1", null);
+            Charger charger = new Charger("Charger1", "Location1", 40.712776, -74.005974);
             charger.setId(chargerId);
 
             given(chargerService.getChargerById(chargerId)).willReturn(Optional.of(charger));
@@ -140,8 +140,8 @@ class ChargerControllerTests {
         @SuppressWarnings("null")
         @Test
         void createCharger_Success() throws Exception {
-            ChargerDTO chargerDTO = new ChargerDTO("Charger1", "streetAddress1", "Location");
-            Charger createdCharger = new Charger("Charger Name", "Location", "Details");
+            ChargerDTO chargerDTO = new ChargerDTO("streetAddress1", "Location", 40.712776, -74.005974);
+            Charger createdCharger = new Charger("Charger Name", "Location", 40.712776, -74.005974);
             createdCharger.setId(1L); // Assuming IDs are generated upon creation
 
             given(chargerService.createCharger(any(ChargerDTO.class))).willReturn(createdCharger);
@@ -151,13 +151,13 @@ class ChargerControllerTests {
                     .content(new ObjectMapper().writeValueAsString(chargerDTO)))
                     .andExpect(status().isCreated())
                     .andExpect(jsonPath("$.id", is(createdCharger.getId().intValue())))
-                    .andExpect(jsonPath("$.name", is(createdCharger.getName())));
+                    .andExpect(jsonPath("$.streetAddress", is(createdCharger.getStreetAddress())));
         }
 
         @SuppressWarnings("null")
         @Test
         void createCharger_ValidationFailed() throws Exception {
-            ChargerDTO invalidChargerDTO = new ChargerDTO("", "", ""); // Example of invalid DTO
+            ChargerDTO invalidChargerDTO = new ChargerDTO( "", "", 0, 0); // Example of invalid DTO
 
             mockMvc.perform(post("/chargers/create")
                     .contentType(MediaType.APPLICATION_JSON)
@@ -169,7 +169,7 @@ class ChargerControllerTests {
         @SuppressWarnings("null")
         @Test
         void createCharger_ErrorHandling() throws Exception {
-            ChargerDTO chargerDTO = new ChargerDTO("Charger Name", "Location", "Details");
+            ChargerDTO chargerDTO = new ChargerDTO("Charger Name", "Location", 40.712776, -74.005974);
 
             given(chargerService.createCharger(any(ChargerDTO.class))).willThrow(new RuntimeException("Unexpected error"));
 

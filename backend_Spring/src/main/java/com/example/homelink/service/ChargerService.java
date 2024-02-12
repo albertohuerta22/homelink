@@ -43,7 +43,7 @@ public class ChargerService {
     //CREATE SINGLE
     public Charger createCharger(ChargerDTO chargerDTO) {
     Charger newCharger = new Charger();
-    newCharger.setName(chargerDTO.getName());
+    newCharger.setStreetAddress(chargerDTO.getStreetAddress());
     newCharger.setLocation(chargerDTO.getLocation());
 
     // Add any additional logic or validation if needed
@@ -63,7 +63,7 @@ public class ChargerService {
             // Add validation, e.g., check if the provided id matches the id in chargerDTO
 
             // Update fields from DTO
-            existingCharger.setName(chargerDTO.getName());
+            existingCharger.setName(chargerDTO.getStreetAddress());
             existingCharger.setLocation(chargerDTO.getLocation());
 
             // Save the updated Charger
