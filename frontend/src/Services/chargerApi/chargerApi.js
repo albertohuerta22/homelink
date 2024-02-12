@@ -10,7 +10,7 @@ export const getChargers = async () => {
     console.log(response);
     return response.data;
   } catch (error) {
-    console.error('Error fetching shelters', error);
+    console.error('Error fetching chargers', error);
     throw error;
   }
 };
