@@ -1,63 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 //leaflet imports
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import L from 'leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
-//leaflet assets
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerIconShadow from 'leaflet/dist/images/marker-shadow.png';
-
 // Import your local services
 import { getShelters } from '../Services/shelterApi/shelterApi';
 import { getChargers } from '../Services/chargerApi/chargerApi';
-
-const chargerIconUrl = '../../public/assets/icons/chargerIcon.png';
-
-// Define the default icon
-const defaultIcon = L.icon({
-  iconUrl: markerIcon,
-  shadowUrl: markerIconShadow,
-  iconSize: [25, 41], // size of the icon
-  iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
-  popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
-  shadowSize: [41, 41], // size of the shadow
-});
-
-const chargerIcon = L.icon({
-  iconUrl: chargerIconUrl,
-  // shadowUrl: markerIconShadow,
-  iconSize: [25, 41], // size of the icon
-  iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
-  popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
-  shadowSize: [41, 41], // size of the shadow
-});
-
-// Set the default icon for all Leaflet markers
-L.Marker.prototype.options.icon = defaultIcon;
-
-const ChargerMarkers = ({ chargers }) => {
-  const map = useMap();
-  useEffect(() => {
-    const markers = L.markerClusterGroup();
-    chargers.forEach((charger) => {
-      const marker = L.marker([charger.latitude, charger.longitude], {
-        icon: chargerIcon,
-      }).bindPopup(`${charger.name}`);
-      markers.addLayer(marker);
-    });
-    map.addLayer(markers);
-    return () => {
-      map.removeLayer(markers);
-    };
-  }, [chargers, map]);
-
-  return null;
-};
+import { ChargerMarkers } from '../Components/ChargerMarkers';
 
 const MapComponent = () => {
   const [shelters, setShelters] = useState([]);
@@ -121,7 +75,7 @@ const MapComponent = () => {
     <MapContainer
       center={center}
       zoom={13}
-      style={{ height: '400px', width: '100%' }}
+      style={{ height: '400px', width: '50%' }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -132,7 +86,18 @@ const MapComponent = () => {
           key={shelter.id}
           position={[shelter.latitude, shelter.longitude]}
         >
-          <Popup>{shelter.centerName} - Open in Google Maps</Popup>
+          <Popup>
+            {shelter.centerName} -
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                shelter.address
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open in Google Maps
+            </a>
+          </Popup>
         </Marker>
       ))}
       <ChargerMarkers chargers={chargers} />
