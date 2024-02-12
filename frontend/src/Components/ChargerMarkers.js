@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
 import { useMap } from 'react-leaflet';
-import { defaultIcon, chargerIcon } from '../Components/Icons';
+import { shelterIcon, chargerIcon } from '../Components/Icons';
 import L from 'leaflet';
 
 // Set the default icon for all Leaflet markers
-L.Marker.prototype.options.icon = defaultIcon;
+L.Marker.prototype.options.icon = shelterIcon;
 
 export const ChargerMarkers = ({ chargers }) => {
   const map = useMap();

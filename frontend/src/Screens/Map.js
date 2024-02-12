@@ -16,6 +16,8 @@ import { ChargerMarkers } from '../Components/ChargerMarkers';
 const MapComponent = () => {
   const [shelters, setShelters] = useState([]);
   const [chargers, setChargers] = useState([]);
+  // State to control shelter visibility
+  const [currentView, setCurrentView] = useState('shelters');
   const center = [40.7128, -74.006]; // Central point for the map
 
   useEffect(() => {
@@ -71,37 +73,60 @@ const MapComponent = () => {
     fetchLocations();
   }, []);
 
+  //toggle button functions
+  const switchView = (view) => {
+    setCurrentView(view);
+  };
+
   return (
-    <MapContainer
-      center={center}
-      zoom={13}
-      style={{ height: '400px', width: '50%' }}
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      {shelters.map((shelter) => (
-        <Marker
-          key={shelter.id}
-          position={[shelter.latitude, shelter.longitude]}
-        >
-          <Popup>
-            {shelter.centerName} -
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                shelter.address
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
+    <>
+      <MapContainer
+        center={center}
+        zoom={13}
+        style={{ height: '400px', width: '50%' }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {currentView === 'shelters' &&
+          shelters.map((shelter) => (
+            <Marker
+              key={shelter.id}
+              position={[shelter.latitude, shelter.longitude]}
             >
-              Open in Google Maps
-            </a>
-          </Popup>
-        </Marker>
-      ))}
-      <ChargerMarkers chargers={chargers} />
-    </MapContainer>
+              <Popup>
+                {shelter.centerName} -
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                    shelter.address
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open in Google Maps
+                </a>
+              </Popup>
+            </Marker>
+          ))}
+        {currentView === 'chargers' && <ChargerMarkers chargers={chargers} />}
+      </MapContainer>
+      <div style={{ textAlign: 'center', margin: '10px' }}>
+        <button
+          onClick={() => switchView('shelters')}
+          disabled={currentView === 'shelters'}
+        >
+          Shelters
+        </button>
+        <button
+          onClick={() => switchView('chargers')}
+          disabled={currentView === 'chargers'}
+        >
+          Chargers
+        </button>
+        {/* Modify or add more buttons for additional layers as needed */}
+      </div>
+    </>
   );
 };
 
