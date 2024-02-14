@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.homelink.entity.Charger;
 import com.example.homelink.exception.charger.ChargerNotFoundException;
 import com.example.homelink.exception.shelter.BadRequestException;
-import com.example.homelink.exception.shelter.ShelterNotFoundException;
+
 import com.example.homelink.service.ChargerService;
 
 import jakarta.validation.Valid;
@@ -40,13 +40,11 @@ public class ChargerController {
     private ChargerService ChargerService;
 
     @GetMapping
-    public List<Charger> getAllChargers() {
+    public ResponseEntity<List<Charger>> getAllChargers() {
         List<Charger> chargers = ChargerService.getAllChargers();
-        if (chargers.isEmpty()) {
-            throw new ShelterNotFoundException("No Available Chargers");
-        }
-        return chargers;
+        return new ResponseEntity<>(chargers, HttpStatus.OK);
     }
+
     
 
     //GET SINGLE CHARGER
