@@ -5,3 +5,4 @@ com/example/homelink/controller/WeatherControllerTest$WeatherTests.class
 com/example/homelink/controller/ChargerControllerTests$CreateChargerTests.class
 com/example/homelink/controller/ChargerControllerTests$GetChargerByIdTests.class
 com/example/homelink/controller/ChargerControllerTests$GetAllChargersTests.class
+com/example/homelink/controller/PantryControllerTest.class

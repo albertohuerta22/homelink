@@ -8,8 +8,6 @@ import jakarta.persistence.GenerationType;
 @Entity
 public class Pantry {
 
-  
-
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
