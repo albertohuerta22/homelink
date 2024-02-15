@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { getShelters } from '../Services/shelterApi/shelterApi';
+import { getShelters } from '../../Services/shelterApi/shelterApi';
+import ListGroup from 'react-bootstrap/ListGroup';
+
+//styling
+import './Home.css';
 
 const Home = () => {
   const [shelters, setShelters] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      // Define a unique key for the shelters data cache
       const cacheKey = 'sheltersData';
-      // Try to get cached shelters data
       const cachedData = localStorage.getItem(cacheKey);
       let sheltersData;
 
       if (cachedData) {
-        // Parse the cached JSON data
         sheltersData = JSON.parse(cachedData);
-        // Optionally, you could implement a cache validation check here as well
       }
 
       if (!sheltersData) {
         try {
           const response = await getShelters();
           sheltersData = response;
-          // Store the new data in local storage
           localStorage.setItem(cacheKey, JSON.stringify(sheltersData));
         } catch (error) {
           console.log('Error fetching data', error);
@@ -30,27 +29,36 @@ const Home = () => {
         }
       }
 
-      // Set state with either cached or fetched data
       setShelters(sheltersData);
     };
 
     fetchData();
   }, []);
 
+  //styles
+  const listItemStyle = {
+    cursor: 'pointer',
+  };
+
   return (
     <div>
       <h1>Welcome to Home Link! Your resource to finding shelter!</h1>
-      <h2>List of Shelters</h2>
-      <ul>
+      <h2 className="text-center">List of Shelters</h2>
+      <ListGroup>
         {shelters.map((shelter) => (
-          <div key={shelter.id}>
-            <li>{shelter.centerName}</li>
-            <li>{shelter.address}</li>
-            <li>{shelter.borough}</li>
+          <ListGroup.Item
+            key={shelter.id}
+            className="mb-1 list-group-item-action list-item-hover"
+            style={listItemStyle}
+          >
+            <strong>{shelter.centerName}</strong>
             <br />
-          </div>
+            {shelter.address}
+            <br />
+            {shelter.borough}
+          </ListGroup.Item>
         ))}
-      </ul>
+      </ListGroup>
     </div>
   );
 };
