@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import UseShelters from '../../Hooks/UseShelters';
 import UseChargers from '../../Hooks/UseChargers';
 import CustomPagination from '../../Hooks/CustomPagination';
 import ChargerItem from '../../Components/ChargerItem';
-import ShelterItem from '../../Components/ShelterItem';
 
 import './Home.css';
 
@@ -20,22 +18,49 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-center">
-        Welcome to Home Link! Your resource for finding shelters and chargers!
-      </h1>
-      <Button onClick={handleViewToggle} className="mb-3">
-        {currentView === 'shelters' ? 'Show Chargers' : 'Show Shelters'}
-      </Button>
-      <ListGroup>
+    <Container>
+      <Row className="mb-4 welcome-section">
+        <Col>
+          <h1 className="text-center header-title">
+            Your resource for finding shelters and chargers!
+          </h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="text-start mb-3">
+          <Button onClick={handleViewToggle}>
+            {currentView === 'shelters' ? 'Show Chargers' : 'Show Shelters'}
+          </Button>
+        </Col>
+      </Row>
+      <Row xs={1} md={2} lg={3} className="g-4 cards-container">
         {currentView === 'shelters'
           ? shelters.map((shelter) => (
-              <ShelterItem key={shelter.id} shelter={shelter} />
+              <Col key={shelter.id}>
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src={
+                      'https://plus.unsplash.com/premium_photo-1683141149687-7c8de76522fe?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                    }
+                  />{' '}
+                  {/* Assuming you have images for shelters */}
+                  <Card.Body>
+                    <Card.Title>{shelter.centerName}</Card.Title>
+                    <Card.Text>
+                      {shelter.address}{' '}
+                      {/* Assuming a description for each shelter */}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
             ))
           : getPageChargers().map((charger) => (
-              <ChargerItem key={charger.id} charger={charger} />
+              <Col key={charger.id}>
+                <ChargerItem key={charger.id} charger={charger} />
+              </Col>
             ))}
-      </ListGroup>
+      </Row>
       {currentView === 'chargers' && totalPages > 1 && (
         <CustomPagination
           currentPage={currentPage}
@@ -43,7 +68,7 @@ const Home = () => {
           onPageChange={setCurrentPage}
         />
       )}
-    </div>
+    </Container>
   );
 };
 

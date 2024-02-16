@@ -3,13 +3,13 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Weather from './Weather';
+import Weather from '../Weather/Weather';
 
 function CustomNavbar() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" variant="light" className="custom-navbar">
       <Container>
-        <Navbar.Brand>HomeLink</Navbar.Brand>
+        <Navbar.Brand href="/">HomeLink</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -26,9 +26,11 @@ function CustomNavbar() {
               <Nav.Link>Contact</Nav.Link>
             </LinkContainer>
           </Nav>
+          <div className="weather-container">
+            <Weather />
+          </div>
         </Navbar.Collapse>
       </Container>
-      <Weather />
     </Navbar>
   );
 }

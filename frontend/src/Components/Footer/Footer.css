@@ -1,0 +1,33 @@
+.footer-section {
+  background-color: #a3d2f2; /* Lighter blue color */
+  padding: 20px 0;
+  color: #ffffff;
+}
+
+.footer-section h5 {
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer-section ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #d1e7ff;
+}
+
+.footer-section .form-control {
+  border-radius: 20px;
+}
+
+.footer-section .btn-primary {
+  border-radius: 20px;
+}

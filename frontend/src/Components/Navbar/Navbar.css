@@ -1,0 +1,32 @@
+.custom-navbar {
+  background-color: #f8f9fa; /* Light background for a clean look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.custom-navbar .navbar-brand {
+  font-weight: bold; /* Make the brand name stand out */
+  color: #007bff; /* Brand color */
+}
+
+.custom-navbar .nav-link {
+  color: #555; /* Dark gray for readability */
+  margin-right: 15px; /* Spacing between links */
+}
+
+.custom-navbar .nav-link:hover {
+  color: #007bff; /* Highlight color on hover */
+}
+
+.weather-container {
+  display: flex;
+  align-items: center; /* Align the weather component vertically */
+}
+
+/* Style for the Weather component if needed */
+.weather-container .weather {
+  background-color: #e9ecef; /* Light background for the weather widget */
+  padding: 5px 10px;
+  border-radius: 5px; /* Rounded edges for the weather widget */
+  font-size: 0.9rem;
+  margin-left: auto; /* Push the weather to the right */
+}
