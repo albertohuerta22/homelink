@@ -33,7 +33,7 @@ const Home = () => {
   const [chargers, setChargers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const chargersPerPage = 10;
+  const chargersPerPage = 20;
 
   useEffect(() => {
     const sheltersCacheKey = 'sheltersData';
@@ -57,12 +57,23 @@ const Home = () => {
         const cachedChargers = localStorage.getItem(chargersCacheKey);
         if (cachedChargers) {
           setChargers(JSON.parse(cachedChargers));
+          setTotalPages(
+            Math.ceil(JSON.parse(cachedChargers).length / chargersPerPage)
+          );
         } else {
           try {
-            const response = await getChargers(); // Fetch all chargers
-            localStorage.setItem(chargersCacheKey, JSON.stringify(response));
-            setChargers(response);
-            setTotalPages(Math.ceil(response.length / chargersPerPage)); // Calculate total pages based on the response
+            const response = await getChargers();
+
+            if (Array.isArray(response)) {
+              localStorage.setItem(chargersCacheKey, JSON.stringify(response));
+              setChargers(response);
+              setTotalPages(Math.ceil(response.length / chargersPerPage));
+            } else {
+              console.error(
+                'Expected an array from the API, received:',
+                response
+              );
+            }
           } catch (error) {
             console.error('Error fetching chargers:', error);
           }
@@ -71,14 +82,33 @@ const Home = () => {
     };
 
     fetchChargers();
-  }, [currentView]);
+  }, [currentView, chargersPerPage]);
 
   const handleViewToggle = () => {
     setCurrentView(currentView === 'shelters' ? 'chargers' : 'shelters');
   };
 
+  const maxButtonsToShow = 10; // Adjust as needed
+  let startPage = Math.max(currentPage - Math.floor(maxButtonsToShow / 2), 1);
+  let endPage = Math.min(startPage + maxButtonsToShow - 1, totalPages);
+
+  if (endPage === totalPages) {
+    startPage = Math.max(endPage - maxButtonsToShow + 1, 1);
+  }
+
   let paginationItems = [];
-  for (let number = 1; number <= totalPages + 1; number++) {
+
+  // Ellipsis for skipping to previous range if not at the start
+  if (startPage > 1) {
+    paginationItems.push(
+      <Pagination.Ellipsis
+        key="prev-ellipsis"
+        onClick={() => setCurrentPage(startPage - 1)}
+      />
+    );
+  }
+
+  for (let number = startPage; number <= endPage; number++) {
     paginationItems.push(
       <Pagination.Item
         key={number}
@@ -89,6 +119,26 @@ const Home = () => {
       </Pagination.Item>
     );
   }
+
+  // Ellipsis for skipping to next range if not at the end
+  if (endPage < totalPages) {
+    paginationItems.push(
+      <Pagination.Ellipsis
+        key="next-ellipsis"
+        onClick={() => setCurrentPage(endPage + 1)}
+      />
+    );
+  }
+
+  const getPageChargers = () => {
+    const startIndex = (currentPage - 1) * chargersPerPage; // Calculate the starting index for the current page
+    const endIndex = startIndex + chargersPerPage; // Calculate the ending index for the current page
+
+    // Directly slice the relevant chargers from the flat array for the current page
+    const pageChargers = chargers.slice(startIndex, endIndex);
+
+    return pageChargers;
+  };
 
   return (
     <div>
@@ -103,16 +153,11 @@ const Home = () => {
           ? shelters.map((shelter) => (
               <ShelterItem key={shelter.id} shelter={shelter} />
             ))
-          : chargers
-              .slice(
-                (currentPage - 1) * chargersPerPage,
-                currentPage * chargersPerPage
-              )
-              .map((charger) => (
-                <ChargerItem key={charger.id} charger={charger} />
-              ))}
+          : getPageChargers().map((charger) => (
+              <ChargerItem key={charger.id} charger={charger} />
+            ))}
       </ListGroup>
-      {currentView === 'chargers' && (
+      {currentView === 'chargers' && totalPages > 1 && (
         <Pagination className="justify-content-center mt-3">
           {paginationItems}
         </Pagination>
