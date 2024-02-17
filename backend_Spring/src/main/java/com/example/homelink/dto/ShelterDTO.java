@@ -6,6 +6,7 @@ public class ShelterDTO {
     private String address;
     private Integer latitude;
     private Integer longitude;
+    private String comments;
 
     // Constructors, if needed
 
@@ -47,6 +48,14 @@ public class ShelterDTO {
 
     public void setLongitude(Integer longitude){
         this.longitude = longitude;
+    }
+
+    public String getComments(){
+        return comments;
+    }
+
+    public void setComments(String comments){
+        this.comments = comments;
     }
 }
 
