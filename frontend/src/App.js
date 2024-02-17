@@ -3,7 +3,7 @@ import Home from './Screens/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
 import About from './Screens/About/About';
 import Map from './Screens/Map/Map';
-import Contact from './Screens/Contact';
+import Contact from './Screens/Contact/Contact';
 import Footer from './Components/Footer/Footer';
 import NotFound from './Screens/NotFound/NotFound';
 import Layout from './Layout/Layout';
