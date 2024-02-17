@@ -1,0 +1,49 @@
+.map-page-container {
+  display: flex;
+  justify-content: space-around; /* Distributes space around items */
+  align-items: stretch; /* Stretch items to fill the container vertically */
+  padding: 20px 0; /* Vertical padding for some spacing from the navbar and footer */
+}
+
+.directions-container,
+.legend-container {
+  flex: 1; /* Allows the containers to grow and take up equal space */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background color for contrast */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 0 10px; /* Horizontal margin for spacing between sections */
+  overflow: auto; /* Allows scrolling for overflow content */
+}
+
+.map-container {
+  flex: 2; /* Allocates more space to the map container */
+  height: 600px; /* Adjust height as needed for your design */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Consistent shadow with other containers */
+}
+
+.map-controls {
+  display: flex;
+  justify-content: center; /* Center controls horizontally */
+  margin-top: 20px; /* Space above the controls */
+}
+
+.map-control-button {
+  background-color: #007bff; /* Primary color for buttons */
+  color: #ffffff; /* White text */
+  border: none; /* Removes default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Button padding */
+  margin: 0 5px; /* Spacing between buttons */
+  cursor: pointer; /* Cursor changes to pointer to indicate clickable */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.map-control-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.map-control-button:disabled {
+  background-color: #cccccc; /* Grayed out for disabled state */
+  cursor: not-allowed; /* Cursor indicates the button is not clickable */
+}

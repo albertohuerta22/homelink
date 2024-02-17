@@ -48,10 +48,13 @@ const Home = () => {
                   />
                   <Card.Body>
                     <Card.Title>{shelter.centerName}</Card.Title>
-                    <Card.Text>
-                      {shelter.address}{' '}
-                      {/* Assuming a description for each shelter */}
-                    </Card.Text>
+                    <Card.Text>{shelter.address}</Card.Text>
+                    {/* Render shelter.comments here */}
+                    {shelter.comments && (
+                      <Card.Text className="shelter-comments">
+                        {shelter.comments}
+                      </Card.Text>
+                    )}
                   </Card.Body>
                 </Card>
               </Col>
