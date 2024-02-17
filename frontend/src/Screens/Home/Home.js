@@ -4,6 +4,7 @@ import UseShelters from '../../Hooks/UseShelters';
 import UseChargers from '../../Hooks/UseChargers';
 import CustomPagination from '../../Hooks/CustomPagination';
 import ChargerItem from '../../Components/ChargerItem';
+import shelterImages from '../../Util/shelterImages';
 
 import './Home.css';
 
@@ -41,10 +42,10 @@ const Home = () => {
                   <Card.Img
                     variant="top"
                     src={
+                      shelterImages[shelter.centerName] ||
                       'https://plus.unsplash.com/premium_photo-1683141149687-7c8de76522fe?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
                     }
-                  />{' '}
-                  {/* Assuming you have images for shelters */}
+                  />
                   <Card.Body>
                     <Card.Title>{shelter.centerName}</Card.Title>
                     <Card.Text>

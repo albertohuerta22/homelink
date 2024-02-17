@@ -5,6 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Weather from '../Weather/Weather';
 
+import './Navbar.css';
+
 function CustomNavbar() {
   return (
     <Navbar expand="lg" variant="light" className="custom-navbar">
