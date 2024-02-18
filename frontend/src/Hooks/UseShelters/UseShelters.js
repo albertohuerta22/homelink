@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getShelters } from '../Services/shelterApi/shelterApi';
+import { getShelters } from '../../Services/shelterApi/shelterApi';
 
 const UseShelters = () => {
   const [shelters, setShelters] = useState([]);

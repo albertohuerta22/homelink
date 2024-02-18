@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import UseShelters from '../../Hooks/UseShelters';
+import UseShelters from '../../Hooks/UseShelters/UseShelters';
 import UseChargers from '../../Hooks/UseChargers';
-import CustomPagination from '../../Hooks/CustomPagination';
+import CustomPagination from '../../Hooks/CustomPagination/CustomPagination';
 import ChargerItem from '../../Components/ChargerItem';
 import shelterImages from '../../Util/shelterImages';
 
